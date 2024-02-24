@@ -1,7 +1,4 @@
-using HouseRentingSystem.MVC.Data;
 using HouseRentingSystem.MVC.Extensions;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace HouseRentingSystem.MVC
 {

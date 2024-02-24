@@ -17,7 +17,7 @@ namespace HouseRentingSystem.Data.Models
         /// </summary>
         [Key]
         [Comment("Agent unique identifier")]
-        public string Id { get; set; } = string.Empty;
+        public int Id { get; set; }
 
         /// <summary>
         /// Agent phone number

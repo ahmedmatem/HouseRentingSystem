@@ -70,7 +70,7 @@ namespace HouseRentingSystem.Data.Models
         /// </summary>
         [Required]
         [Comment("House Agent identifier")]
-        public string AgentId { get; set; } = string.Empty;
+        public int AgentId { get; set; }
 
         /// <summary>
         /// House Renter identifier
@@ -79,10 +79,8 @@ namespace HouseRentingSystem.Data.Models
         [Comment("House Renter identifier")]
         public int RenterId { get; set; }
 
-        [ForeignKey("CategoryId")]
         public Category Category { get; set; } = null!;
 
-        [ForeignKey("AgentId")]
-        public IdentityUser Agent { get; set; } = null!;
+        public Agent Agent { get; set; } = null!;
     }
 }
