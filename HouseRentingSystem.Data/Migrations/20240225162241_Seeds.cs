@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HouseRentingSystem.Data.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Seeds : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -200,7 +200,7 @@ namespace HouseRentingSystem.Data.Migrations
                     PricePerMonth = table.Column<decimal>(type: "decimal(18,2)", nullable: false, comment: "House rent price per month"),
                     CategoryId = table.Column<int>(type: "int", nullable: false, comment: "House category identifier"),
                     AgentId = table.Column<int>(type: "int", nullable: false, comment: "House Agent identifier"),
-                    RenterId = table.Column<int>(type: "int", nullable: false, comment: "House Renter identifier")
+                    RenterId = table.Column<string>(type: "nvarchar(max)", nullable: false, comment: "House Renter identifier")
                 },
                 constraints: table =>
                 {
@@ -218,6 +218,45 @@ namespace HouseRentingSystem.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "c438e263-b60f-487c-8d2d-141a91fa4a15", 0, "143adf81-531c-411a-8abb-94886ad60d72", "guest@softuni.bg", false, false, null, "guest@softuni.bg", "guest@softuni.bg", "AQAAAAEAACcQAAAAEK5nvgbElePuG5Vhk13JVMTaZCdabR5dql73cdOKP9mtgxrYVI8xnFsHht5FIUwm6w==", null, false, "a47d7dea-388a-4d8b-89f3-b598a851eb58", false, "guest@softuni.bg" },
+                    { "f5f03071-e969-438a-8171-0fdd2a07afe6", 0, "deb436d5-7c85-451b-a1ef-8ed378bdb365", "agent@softuni.bg", false, false, null, "agent@softuni.bg", "agent@softuni.bg", "AQAAAAEAACcQAAAAEEE6+7wCaaup2LfzEhCp71KPQI3K/eWtuRD95gthw/Z521AbqGsvEiQCiD82SIGVlw==", null, false, "2a2a4ed6-5036-4b1b-895b-1b77ec5818d1", false, "agent@softuni.bg" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Cottage" },
+                    { 2, "Single" },
+                    { 3, "Duplex" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Agents",
+                columns: new[] { "Id", "PhoneNumber", "UserId" },
+                values: new object[] { 1, "+359888888888", "f5f03071-e969-438a-8171-0fdd2a07afe6" });
+
+            migrationBuilder.InsertData(
+                table: "Houses",
+                columns: new[] { "Id", "Address", "AgentId", "CategoryId", "Description", "ImageUrl", "PricePerMonth", "RenterId", "Title" },
+                values: new object[] { 1, "North London, UK (near the border)", 1, 3, "A big house for your whole family. Don't miss to buy a house with three bedrooms.", "https://www.luxury-architecture.net/wp-content/uploads/2017/12/1513217889-7597-FAIRWAYS-010.jpg", 2100.00m, "c438e263-b60f-487c-8d2d-141a91fa4a15", "Big House Marina" });
+
+            migrationBuilder.InsertData(
+                table: "Houses",
+                columns: new[] { "Id", "Address", "AgentId", "CategoryId", "Description", "ImageUrl", "PricePerMonth", "RenterId", "Title" },
+                values: new object[] { 2, "Near the Sea Garden in Burgas, Bulgaria", 1, 2, "It has the best comfort you will ever ask for. With two bedrooms, it is great for your family.", "https://cf.bstatic.com/xdata/images/hotel/max1024x768/179489660.jpg?k=2029f6d9589b49c95dcc9503a265e292c2cdfcb5277487a0050397c3f8dd545a&o=&hp=1", 1200.00m, "", "Family House Comfort" });
+
+            migrationBuilder.InsertData(
+                table: "Houses",
+                columns: new[] { "Id", "Address", "AgentId", "CategoryId", "Description", "ImageUrl", "PricePerMonth", "RenterId", "Title" },
+                values: new object[] { 3, "Boyana Neighbourhood, Sofia, Bulgaria", 1, 2, "This luxurious house is everything you will need. It is just excellent.", "https://i.pinimg.com/originals/a6/f5/85/a6f5850a77633c56e4e4ac4f867e3c00.jpg", 2000.00m, "", "Grand House" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Agents_UserId",

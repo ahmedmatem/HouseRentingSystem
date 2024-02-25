@@ -47,6 +47,14 @@ namespace HouseRentingSystem.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Agents");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            PhoneNumber = "+359888888888",
+                            UserId = "f5f03071-e969-438a-8171-0fdd2a07afe6"
+                        });
                 });
 
             modelBuilder.Entity("HouseRentingSystem.Data.Models.Category", b =>
@@ -67,6 +75,23 @@ namespace HouseRentingSystem.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Cottage"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Single"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Duplex"
+                        });
                 });
 
             modelBuilder.Entity("HouseRentingSystem.Data.Models.House", b =>
@@ -107,8 +132,9 @@ namespace HouseRentingSystem.Data.Migrations
                         .HasColumnType("decimal(18,2)")
                         .HasComment("House rent price per month");
 
-                    b.Property<int>("RenterId")
-                        .HasColumnType("int")
+                    b.Property<string>("RenterId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
                         .HasComment("House Renter identifier");
 
                     b.Property<string>("Title")
@@ -124,6 +150,44 @@ namespace HouseRentingSystem.Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Houses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "North London, UK (near the border)",
+                            AgentId = 1,
+                            CategoryId = 3,
+                            Description = "A big house for your whole family. Don't miss to buy a house with three bedrooms.",
+                            ImageUrl = "https://www.luxury-architecture.net/wp-content/uploads/2017/12/1513217889-7597-FAIRWAYS-010.jpg",
+                            PricePerMonth = 2100.00m,
+                            RenterId = "c438e263-b60f-487c-8d2d-141a91fa4a15",
+                            Title = "Big House Marina"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "Near the Sea Garden in Burgas, Bulgaria",
+                            AgentId = 1,
+                            CategoryId = 2,
+                            Description = "It has the best comfort you will ever ask for. With two bedrooms, it is great for your family.",
+                            ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1024x768/179489660.jpg?k=2029f6d9589b49c95dcc9503a265e292c2cdfcb5277487a0050397c3f8dd545a&o=&hp=1",
+                            PricePerMonth = 1200.00m,
+                            RenterId = "",
+                            Title = "Family House Comfort"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Address = "Boyana Neighbourhood, Sofia, Bulgaria",
+                            AgentId = 1,
+                            CategoryId = 2,
+                            Description = "This luxurious house is everything you will need. It is just excellent.",
+                            ImageUrl = "https://i.pinimg.com/originals/a6/f5/85/a6f5850a77633c56e4e4ac4f867e3c00.jpg",
+                            PricePerMonth = 2000.00m,
+                            RenterId = "",
+                            Title = "Grand House"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -241,6 +305,40 @@ namespace HouseRentingSystem.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "c438e263-b60f-487c-8d2d-141a91fa4a15",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "143adf81-531c-411a-8abb-94886ad60d72",
+                            Email = "guest@softuni.bg",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "guest@softuni.bg",
+                            NormalizedUserName = "guest@softuni.bg",
+                            PasswordHash = "AQAAAAEAACcQAAAAEK5nvgbElePuG5Vhk13JVMTaZCdabR5dql73cdOKP9mtgxrYVI8xnFsHht5FIUwm6w==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "a47d7dea-388a-4d8b-89f3-b598a851eb58",
+                            TwoFactorEnabled = false,
+                            UserName = "guest@softuni.bg"
+                        },
+                        new
+                        {
+                            Id = "f5f03071-e969-438a-8171-0fdd2a07afe6",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "deb436d5-7c85-451b-a1ef-8ed378bdb365",
+                            Email = "agent@softuni.bg",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "agent@softuni.bg",
+                            NormalizedUserName = "agent@softuni.bg",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEE6+7wCaaup2LfzEhCp71KPQI3K/eWtuRD95gthw/Z521AbqGsvEiQCiD82SIGVlw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2a2a4ed6-5036-4b1b-895b-1b77ec5818d1",
+                            TwoFactorEnabled = false,
+                            UserName = "agent@softuni.bg"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>

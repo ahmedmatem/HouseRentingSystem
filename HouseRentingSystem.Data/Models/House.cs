@@ -75,9 +75,8 @@ namespace HouseRentingSystem.Data.Models
         /// <summary>
         /// House Renter identifier
         /// </summary>
-        [Required]
         [Comment("House Renter identifier")]
-        public int RenterId { get; set; }
+        public string RenterId { get; set; } = string.Empty;
 
         public Category Category { get; set; } = null!;
 
